@@ -2,14 +2,11 @@
 
 [![Join the chat at https://gitter.im/deviantony/fig-elk](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/deviantony/fig-elk?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Run the ELK (Elasticseach, Logstash, Kibana) stack with Docker and Docker-compose.
-
-It will give you the ability to quickly test your logstash filters and check how the data can be processed in Kibana.
+Run the EK (Elasticseach, Kibana) stack with Docker and Docker-compose.
 
 Based on the official images:
 
 * [elasticsearch](https://registry.hub.docker.com/_/elasticsearch/)
-* [logstash](https://registry.hub.docker.com/_/logstash/)
 * [kibana](https://registry.hub.docker.com/_/kibana/)
 
 # Requirements
@@ -27,7 +24,7 @@ For example on Redhat and CentOS, the following will apply the proper context:
 
 ````bash
 .-root@centos ~
--$ chcon -R system_u:object_r:admin_home_t:s0 fig-elk/
+-$ chcon -R system_u:object_r:admin_home_t:s0 docker-elk/
 ````
 
 # Usage
@@ -44,17 +41,11 @@ You can also choose to run it in background (detached mode):
 $ docker-compose up -d
 ```
 
-Now that the stack is running, you'll want to inject logs in it. The shipped logstash configuration allows you to send content via tcp:
-
-```bash
-$ nc localhost 5000 < /path/to/logfile.log
-```
-
-And then access Kibana UI by hitting [http://localhost:5601](http://localhost:5601) with a web browser.
+Then access Kibana UI by hitting [http://localhost:5601](http://localhost:5601) with a web browser.
 
 By default, the stack exposes the following ports:
-* 5000: Logstash TCP input.
 * 9200: Elasticsearch HTTP (with Marvel plugin accessible via [http://localhost:9200/_plugin/marvel](http://localhost:9200/_plugin/marvel))
+* 9300: Elasticsearch transport protocol
 * 5601: Kibana 4 web interface
 
 *WARNING*: If you're using *boot2docker*, you must access it via the *boot2docker* IP address instead of *localhost*.
@@ -68,13 +59,6 @@ By default, the stack exposes the following ports:
 ## How can I tune Kibana configuration?
 
 The Kibana default configuration is stored in `kibana/config/kibana.yml`.
-
-## How can I tune Logstash configuration?
-
-The logstash configuration is stored in `logstash/config/logstash.conf`.
-
-The folder `logstash/config` is mapped onto the container `/etc/logstash/conf.d` so you
-can create more than one file in that folder if you'd like to. However, you must be aware that config files will be read from the directory in alphabetical order.
 
 ## How can I tune Elasticsearch configuration?
 
