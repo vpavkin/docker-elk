@@ -6,6 +6,7 @@ elasticsearch:
   volumes:
     - /var/lib/elasticsearch:/usr/share/elasticsearch/data
     - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    - ./elasticsearch/config/templates:/usr/share/elasticsearch/config/templates
 logstash:
   image: logstash:latest
   command: logstash -f /etc/logstash/conf.d/logstash.conf

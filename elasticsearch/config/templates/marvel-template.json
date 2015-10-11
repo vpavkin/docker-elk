@@ -1,0 +1,9 @@
+{
+	"marvel-template":{
+		"order": 1,
+	    "template" : ".marvel*",
+	    "settings" : {
+	        "number_of_replicas" : 0
+	    }
+	}
+}

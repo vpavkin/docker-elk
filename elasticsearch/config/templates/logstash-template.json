@@ -1,0 +1,8 @@
+{
+	"logstash-template":{
+	    "template" : "logstash-*",
+	    "settings" : {
+	        "number_of_replicas" : 0
+	    }
+    }
+}
