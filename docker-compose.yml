@@ -2,8 +2,10 @@ elasticsearch:
   build: elasticsearch/
   ports:
     - "9200:9200"
+    - "9300:9300"
   volumes:
     - /var/lib/elasticsearch:/usr/share/elasticsearch/data
+    - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
 logstash:
   image: logstash:latest
   command: logstash -f /etc/logstash/conf.d/logstash.conf
